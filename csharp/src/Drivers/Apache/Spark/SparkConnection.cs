@@ -1006,7 +1006,7 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Spark
             return fileVersionInfo.ProductVersion ?? ProductVersionDefault;
         }
 
-        protected static Uri GetBaseAddress(string? uri, string? hostName, string? path, string? port)
+        protected static Uri GetBaseAddress(string? uri, string? hostName, string? path, string? port, bool isSsl)
         {
             // Uri property takes precedent.
             if (!string.IsNullOrWhiteSpace(uri))
@@ -1022,8 +1022,7 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Spark
 
             bool isPortSet = !string.IsNullOrEmpty(port);
             bool isValidPortNumber = int.TryParse(port, out int portNumber) && portNumber > 0;
-            bool isDefaultHttpsPort = !isPortSet || (isValidPortNumber && portNumber == 443);
-            string uriScheme = isDefaultHttpsPort ? Uri.UriSchemeHttps : Uri.UriSchemeHttp;
+            string uriScheme = isSsl ? Uri.UriSchemeHttps : Uri.UriSchemeHttp;
             int uriPort;
             if (!isPortSet)
                 uriPort = -1;
