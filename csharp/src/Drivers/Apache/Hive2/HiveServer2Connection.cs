@@ -112,10 +112,9 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
 
         protected internal DataTypeConversion DataTypeConversion { get; set; } = DataTypeConversion.None;
 
-        protected internal HiveServer2TlsOption TlsOptions { get; set; } = HiveServer2TlsOption.Empty;
+        protected internal TlsProperties TlsOptions { get; set; } = new TlsProperties();
 
         protected internal int ConnectTimeoutMilliseconds { get; set; } = ConnectTimeoutMillisecondsDefault;
-
         protected abstract TTransport CreateTransport();
 
         protected abstract Task<TProtocol> CreateProtocolAsync(TTransport transport, CancellationToken cancellationToken = default);

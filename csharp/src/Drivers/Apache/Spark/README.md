@@ -41,6 +41,11 @@ but can also be passed in the call to `AdbcDatabase.Connect`.
 | `adbc.apache.statement.batch_size` | Sets the maximum number of rows to retrieve in a single batch request. | `50000` |
 | `adbc.apache.statement.polltime_ms` | If polling is necessary to get a result, this option sets the length of time (in milliseconds) to wait between polls. | `500` |
 | `adbc.apache.statement.query_timeout_s` | Sets the maximum time (in seconds) for a query to complete. Values can be 0 (infinite) or greater than zero. | `60` |
+| `adbc.apache.ssl` | If ssl needs to enabled or not. One of `True`, `False` | `False` |
+| `adbc.apache.allow_self_signed` | If self signed tls/ssl certificate needs to be allowed or not. One of `True`, `False` | `False` |
+| `adbc.apache.allow_hostname_mismatch` | If hostname mismatch is allowed for ssl. One of `True`, `False` | `False` |
+| `adbc.apache.trusted_certificate_path` | The full path of the tls/ssl certificate file containing custom CA certificates for verifying the server when connecting over TLS | `` |
+
 
 ## Timeout Configuration
 
