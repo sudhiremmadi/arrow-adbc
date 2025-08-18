@@ -115,19 +115,15 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
             TTransport baseTransport;
             if (TlsOptions.IsTlsEnabled)
             {
-                X509Certificate2? trustedCert = !string.IsNullOrEmpty(TlsOptions.TrustedCertificatePath)
-                    ? new X509Certificate2(TlsOptions.TrustedCertificatePath!)
-                    : null;
-
                 RemoteCertificateValidationCallback certValidator = (sender, cert, chain, errors) => HiveServer2TlsImpl.ValidateCertificate(cert, errors, TlsOptions);
 
                 if (IPAddress.TryParse(hostName!, out var ipAddress))
                 {
-                    baseTransport = new TTlsSocketTransport(ipAddress, portValue, config: thriftConfig, 0, trustedCert, certValidator);
+                    baseTransport = new TTlsSocketTransport(ipAddress, portValue, config: thriftConfig, 0, null, certValidator);
                 }
                 else
                 {
-                    baseTransport = new TTlsSocketTransport(hostName!, portValue, config: thriftConfig, 0, trustedCert, certValidator);
+                    baseTransport = new TTlsSocketTransport(hostName!, portValue, config: thriftConfig, 0, null, certValidator);
                 }
             }
             else
