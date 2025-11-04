@@ -35,6 +35,12 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
         public const string Basic = "basic";
     }
 
+    public static class HiveServer2TransportSizeConstants
+    {
+        public const string MessageSizeBytes = "104857600";
+        public const string FrameSizeBytes = "16384000";
+    }
+
     public static class HiveServer2TransportTypeConstants
     {
         public const string Http = "http";
