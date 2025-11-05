@@ -358,7 +358,7 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
 
         public long BatchSize { get; private set; } = HiveServer2Connection.BatchSizeDefault;
 
-        public virtual bool EnableBatchSizeStopCondition { get; protected set; } = HiveServer2Connection.EnableBatchSizeStopConditionDefault;
+        public bool EnableBatchSizeStopCondition { get; protected set; } = HiveServer2Connection.EnableBatchSizeStopConditionDefault;
 
         public int QueryTimeoutSeconds
         {
