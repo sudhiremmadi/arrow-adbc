@@ -67,6 +67,10 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
         protected virtual void SetStatementProperties(TExecuteStatementReq statement)
         {
             statement.QueryTimeout = QueryTimeoutSeconds;
+            if (RunAsync.HasValue)
+            {
+                statement.RunAsync = RunAsync.Value;
+            }
         }
 
         /// <summary>
@@ -283,6 +287,12 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
                         QueryTimeoutSeconds = queryTimeoutSeconds;
                     }
                     break;
+                case ApacheParameters.RunAsync:
+                    if (ApacheUtility.BooleanIsValid(key, value, out bool runAsync))
+                    {
+                        RunAsync = runAsync;
+                    }
+                    break;
                 case ApacheParameters.IsMetadataCommand:
                     if (ApacheUtility.BooleanIsValid(key, value, out bool isMetadataCommand))
                     {
@@ -367,6 +377,8 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
             set => Connection.QueryTimeoutSeconds = value;
         }
 
+        protected internal bool? RunAsync { get; private set; }
+
         protected internal bool IsMetadataCommand { get; set; } = false;
         protected internal string? CatalogName { get; set; }
         protected internal string? SchemaName { get; set; }
@@ -412,6 +424,7 @@ namespace Apache.Arrow.Adbc.Drivers.Apache.Hive2
                     case ApacheParameters.BatchSize:
                     case ApacheParameters.PollTimeMilliseconds:
                     case ApacheParameters.QueryTimeoutSeconds:
+                    case ApacheParameters.RunAsync:
                         {
                             SetOption(kvp.Key, kvp.Value);
                             break;
