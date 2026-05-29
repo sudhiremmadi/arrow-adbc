@@ -26,6 +26,7 @@ namespace Apache.Arrow.Adbc.Drivers.Apache
         public const string BatchSize = "adbc.apache.statement.batch_size";
         public const string BatchSizeStopCondition = "adbc.apache.statement.batch_size_stop_condition";
         public const string QueryTimeoutSeconds = "adbc.apache.statement.query_timeout_s";
+        public const string RunAsync = "adbc.apache.statement.run_async";
 
         /// <summary>
         /// The indicator of whether the <c>AdbcStatement.ExecuteQuery[Async]</c> should execute a metadata command query.
